@@ -1,21 +1,26 @@
 public class TestObject {
 
-  private String name;
-  private Integer level;
+  private int level;
 
-
-  public TestObject(){}
-
-  public TestObject(String name, Integer level) {
-    this.name = name;
+  public TestObject(int level){
     this.level = level;
   }
+
+  public int getLevel() {
+    return this.level;
+  }
   
-  public String getName() {
-    return this.name;
+  public void setLevel(int level) {
+    this.level = level;
   }
 
-  public Integer getLevel() {
-    return this.level;
+  public static void main(String[] args) {
+    TestObject object = new TestObject(10);
+    int level = object.getLevel();
+    System.out.println(level);
+
+    TestObject obj2 = new TestObject(20);
+    int newLevel = obj2.getLevel();
+    System.out.println(newLevel);
   }
 }

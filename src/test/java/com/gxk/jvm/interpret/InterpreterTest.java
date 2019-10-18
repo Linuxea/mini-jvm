@@ -216,8 +216,32 @@ public class InterpreterTest {
     Frame frame = new Frame(method, thread);
 
     thread.pushFrame(frame);
-    frame.localVars.setInt(0, 1000);
 
     new Interpreter().loop(thread);
+  }
+
+  @Test
+  public void test_object( )throws Exception {
+    ClassFile cf = ClassReader.read(Paths.get("example/TestObject.class"));
+    KClass clazz = Classloader.doLoadClass("TestObject", cf);
+    Classloader.doRegister(clazz);
+
+    KMethod method = clazz.getMainMethod();
+
+    Thread thread = new Thread(1024);
+    Frame frame = new Frame(method, thread);
+
+    thread.pushFrame(frame);
+
+    new Interpreter().loop(thread);
+  }
+
+  @Test
+  public void test_array_0( )throws Exception {
+    ClassFile cf = ClassReader.read(Paths.get("example/HelloWorld.class"));
+    KClass clazz = Classloader.doLoadClass("HelloWorld", cf);
+    Classloader.doRegister(clazz);
+    KMethod method = clazz.getMainMethod();
+    new Interpreter().interpret(method, new String[] {"hello", "mini-jvm"});
   }
 }
